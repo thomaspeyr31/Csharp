@@ -1,0 +1,12 @@
+bin/
+obj/
+taskboard.db
+taskboard.db-shm
+taskboard.db-wal
+.vscode/
+.idea/
+.DS_Store
+*.user
+TestResults/
+
+
