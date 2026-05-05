@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskBoard</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<header id="topbar" hidden>
+    <div class="brand">TaskBoard</div>
+    <div class="crumbs">
+        <button id="btn-home" class="link">Workspaces</button>
+        <span id="crumb-ws" hidden> / <strong></strong></span>
+        <span id="crumb-board" hidden> / <strong></strong></span>
+    </div>
+    <div class="me">
+        <span id="me-email"></span>
+        <button id="btn-logout" class="link">Déconnexion</button>
+    </div>
+</header>
+
+<main id="app">
+
+    <section id="screen-auth" class="auth">
+        <div class="auth-card">
+            <h1>TaskBoard</h1>
+            <div class="tabs">
+                <button data-tab="login" class="tab active">Connexion</button>
+                <button data-tab="register" class="tab">Inscription</button>
+            </div>
+
+            <form id="form-login" class="auth-form">
+                <label>Email <input type="email" name="email" required></label>
+                <label>Mot de passe <input type="password" name="password" required></label>
+                <button type="submit">Se connecter</button>
+                <p class="error" id="login-error" hidden></p>
+            </form>
+
+            <form id="form-register" class="auth-form" hidden>
+                <label>Nom d'utilisateur <input name="username" required minlength="2"></label>
+                <label>Email <input type="email" name="email" required></label>
+                <label>Mot de passe <input type="password" name="password" required minlength="6"></label>
+                <button type="submit">Créer le compte</button>
+                <p class="error" id="register-error" hidden></p>
+                <p class="ok" id="register-ok" hidden></p>
+            </form>
+        </div>
+    </section>
+
+    <section id="screen-workspaces" class="screen" hidden>
+        <h2>Mes workspaces</h2>
+        <p id="workspaces-summary" class="muted"></p>
+        <ul id="workspaces-list" class="card-list"></ul>
+        <form id="form-new-workspace" class="stack-form">
+            <input name="name" placeholder="Nom du workspace" required>
+            <input name="emails" placeholder="Inviter des collaborateurs (emails séparés par virgule, optionnel)">
+            <button type="submit">+ Créer</button>
+            <p class="error" id="ws-create-error" hidden></p>
+        </form>
+    </section>
+
+    <section id="screen-boards" class="screen" hidden>
+        <h2 id="boards-title">Boards</h2>
+        <ul id="boards-list" class="card-list"></ul>
+        <form id="form-new-board" class="inline-form">
+            <input name="name" placeholder="Nom du board" required>
+            <button type="submit">+ Créer</button>
+        </form>
+
+        <h3 class="members-title">Membres du workspace</h3>
+        <ul id="members-list" class="member-list"></ul>
+        <form id="form-invite-member" class="inline-form" hidden>
+            <input name="email" type="email" placeholder="Email à inviter" required>
+            <button type="submit">+ Inviter</button>
+            <p class="error" id="invite-error" hidden></p>
+        </form>
+    </section>
+
+    <section id="screen-board" class="screen" hidden>
+        <div id="board-columns" class="board"></div>
+    </section>
+
+</main>
+
+<div id="card-modal" class="modal" hidden>
+    <div class="modal-content">
+        <button class="close" id="card-close">×</button>
+        <input id="card-title" class="modal-title">
+        <label>Description
+            <textarea id="card-desc" rows="4"></textarea>
+        </label>
+        <label>Échéance
+            <input id="card-due" type="datetime-local">
+        </label>
+        <button id="card-save">Enregistrer</button>
+        <button id="card-delete" class="danger">Supprimer la carte</button>
+
+        <h4>Commentaires</h4>
+        <ul id="card-comments" class="comments"></ul>
+        <form id="card-comment-form" class="inline-form">
+            <input name="content" placeholder="Ajouter un commentaire" required>
+            <button type="submit">Publier</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/views.js"></script>
+<script src="/js/board.js"></script>
+<script src="/js/realtime.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+
